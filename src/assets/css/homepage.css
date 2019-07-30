@@ -1,0 +1,11 @@
+.banner-img {
+  background-image: url('../img/banner-img.png') !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  width: 100% !important;
+  height: 390px !important;
+}
+
+.banner-title {
+  font-size: 27px !important;
+}
