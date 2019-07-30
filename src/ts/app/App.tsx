@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router
 } from 'react-router-dom';
 
-import HomePage from '../components/common/HomePage';
+import HomePage from '../components/common/HomePage/HomePage';
 
 function App() {
   return (
