@@ -1,23 +1,18 @@
 import React from 'react';
-import './App.css';
+
+import {
+  Route,
+  Link,
+  BrowserRouter as Router
+} from 'react-router-dom';
+
+import HomePage from '../components/common/HomePage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          hola mundo
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React hh
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Route path="/" component={HomePage} />
+    </Router>
   );
 }
 
