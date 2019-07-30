@@ -22,6 +22,24 @@ body {
   background-color: #fff !important;
 }
 
+/*COLOR*/
+.color-dark-blue {
+  color: #203652 !important;
+}
+
+.color-light-blue {
+  color: #8CC5CC !important;
+}
+
+/*PADDING*/
+.padding-top-xsmall {
+  padding-top: 10px !important;
+}
+
+.padding-bottom-xsmall {
+  padding-bottom: 10px !important;
+}
+
 /*FLEX-BOX*/
 .display-flex {
   display: flex !important;

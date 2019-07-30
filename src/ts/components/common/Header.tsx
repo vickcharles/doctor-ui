@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core';
 const Header = () => {
   return (
     <div className="container">
-      <div className="justify-content-space-between display-flex">
+      <div className="justify-content-space-between display-flex padding-top-xsmall padding-bottom-xsmall">
         <Typography color="primary">
           DOCTORS-UI
         </Typography>
@@ -13,7 +13,7 @@ const Header = () => {
           REGISTRARME
         </Typography>
       </div>
-	</div>
+	  </div>
   );
 };
 

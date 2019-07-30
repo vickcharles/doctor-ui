@@ -15,7 +15,10 @@ const theme = createMuiTheme({
     },
     MuiButton: {
       containedPrimary: {
-        backgroundColor: '#8CC5CC'
+        backgroundColor: '#8CC5CC',
+        '&:hover': {
+            background: '#8CC5CC !important'
+          },
        }
     },
     MuiTypography: {

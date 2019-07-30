@@ -2,10 +2,13 @@
   background-image: url('../img/banner-img.png') !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
+  background-position-x: center !important;
   width: 100% !important;
-  height: 390px !important;
+  height: 400px !important;
 }
 
 .banner-title {
-  font-size: 27px !important;
+  font-size: 28px !important;
+  font-weight: 500 !important;
+  line-height: 42px !important;
 }

@@ -12,9 +12,10 @@ const HomePage = () => {
     <div className="margin-top-xlarge">
       <Grid container={true} className="container">
         <Grid xs={12} md={6}>
-          <Typography color="primary" className="banner-title">
-            CONECTATE CON LA COMUNIDAD DE DOCTORES MAS GRANDE DE COLOMBIA
-          </Typography>
+          <h1 className="banner-title color-dark-blue text-align-center">
+            CONECTATE CON LA <span className="color-light-blue"> COMUNIDAD </span> DE DOCTORES MAS GRANDE DE
+            <span className="color-light-blue"> COLOMBIA</span>
+          </h1>
           <div className="banner-img margin-top-small">
           </div>
         </Grid>
