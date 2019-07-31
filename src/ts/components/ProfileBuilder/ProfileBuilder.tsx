@@ -4,6 +4,9 @@ import AvatarUploader from '../AvatarUploader/AvatarUploader';
 import { Grid, TextField, Typography } from '@material-ui/core';
 import SectionTitle from '../common/SectionTitle';
 
+/**
+ * Profile Builder
+ */
 export const ProfileBuilder = () => {
   return (
     <Grid container={true} className="margin-top-small">

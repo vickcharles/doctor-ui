@@ -1,12 +1,12 @@
 import * as React from 'react';
 import '../../../../assets/css/homepage.css';
-
-import {
-  Grid,
-} from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 import { Login } from '../../Login/Login';
 
+/**
+ * Homepage
+ */
 const HomePage = () => {
   return (
     <div className="margin-top-xlarge">

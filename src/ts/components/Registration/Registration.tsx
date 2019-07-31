@@ -7,6 +7,10 @@ import {
   Button
 } from '@material-ui/core';
 
+
+/**
+ * Registration Form
+ */
 const Registration = () => {
   return (
     <Grid container={true} className="margin-top-small">

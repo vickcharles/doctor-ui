@@ -3,6 +3,9 @@ import * as React from 'react';
 import { Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
+/**
+ * Main header
+ */
 const Header = () => {
   return (
     <div className="container">

@@ -6,6 +6,9 @@ import {
 	Button
 } from '@material-ui/core';
 
+/**
+ * Login Form
+ */
 export const Login = () => {
   return (
     <div className="section-wide background-color-white box-shadow">
