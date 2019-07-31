@@ -185,9 +185,9 @@ class AvatarCropper extends React.Component<PropsWithStyles, State> {
           <img ref={(e) => { this.imageHolder = e; }} src={currentLogo} style={imgStyle} alt="avatar"/>
         </label>
 				{!this.state.isCropping &&
-				 <Typography color="primary" className="text-align-center">
-					 Cambia tu foto de perfil
-				 </Typography>
+				   <Typography color="primary" className="text-align-center">
+					  Cambia tu foto de perfil
+				  </Typography>
 				}
         {actions}
       </div>
