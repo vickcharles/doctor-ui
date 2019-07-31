@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 To run a local DOCTORS UI development server and view the application in your browser:
 
 #### Step 1. Clone repo
-`git clone https://github.com/iamvane/nabi_ui.git`
+`git clone https://github.com/vickcharles/doctor-ui.git`
 
 #### Step 2. Install dependecies
 `npm install`
