@@ -186,7 +186,7 @@ class AvatarCropper extends React.Component<PropsWithStyles, State> {
         </label>
 				{!this.state.isCropping &&
 				   <Typography color="primary" className="text-align-center">
-					  Cambia tu foto de perfil
+					    Cambia tu foto de perfil
 				  </Typography>
 				}
         {actions}
