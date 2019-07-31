@@ -2,7 +2,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and TypeScript.
 
 ## DEVELOPER
- * Vickler Charles (contact: vane.charles24@gmail.com)
+ * Vickler Charles (contact: charlesvikler@gmail.com)
 
 ## Development
 To run a local DOCTORS UI development server and view the application in your browser:
