@@ -8,6 +8,7 @@ import {
 import HomePage from '../components/common/HomePage/HomePage';
 import Registration from '../components/Registration/Registration';
 import Header from '../components/common/Header';
+import { ProfileBuilder } from '../components/ProfileBuilder/ProfileBuilder';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Header />
       <Route path="/" exact={true} component={HomePage} />
       <Route path="/crear-cuenta" component={Registration} />
+      <Route path="/profile-builder" component={ProfileBuilder} />
     </Router>
   );
 }
