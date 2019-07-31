@@ -4,11 +4,25 @@
   background-size: cover !important;
   background-position-x: center !important;
   width: 100% !important;
-  height: 400px !important;
+  height: 150px !important;
 }
 
 .banner-title {
-  font-size: 28px !important;
+  font-size: 22px !important;
   font-weight: 500 !important;
   line-height: 42px !important;
+}
+
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-width: 768px) {
+    .banner-title {
+      font-size: 29px !important;
+      font-weight: 500 !important;
+      line-height: 42px !important;
+    }
+
+    .banner-img  {
+      height: 300px !important;
+    }
 }

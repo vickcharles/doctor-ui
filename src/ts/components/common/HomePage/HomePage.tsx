@@ -1,11 +1,11 @@
 import * as React from 'react';
-import Button from '@material-ui/core/Button';
-import '../../../../assets/css/homepage.css'
+import '../../../../assets/css/homepage.css';
+
 import {
   Grid,
-  TextField,
-  Typography
 } from '@material-ui/core';
+
+import { Login } from '../../Login/Login';
 
 const HomePage = () => {
   return (
@@ -20,25 +20,8 @@ const HomePage = () => {
           </div>
         </Grid>
         <Grid xs={12} md={6}>
-          <Grid xs={12} md={8} className="margin-auto">
-            <div className="section-wide background-color-white box-shadow">
-              <Typography className="text-align-center" color="primary">
-                ACCEDER
-              </Typography>
-              <TextField
-                fullWidth={true}
-                placeholder="correo electronico"
-                margin="normal"
-              />
-              <TextField
-                fullWidth={true}
-                placeholder="contraseña"
-                margin="normal"
-              />
-              <Button variant="contained" className="margin-top-small" color="primary">
-                ACCEDER
-              </Button>
-            </div>
+          <Grid xs={12} md={9} className="margin-auto">
+            <Login />
           </Grid>
         </Grid>
       </Grid>

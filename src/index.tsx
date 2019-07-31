@@ -9,9 +9,9 @@ const theme = createMuiTheme({
   overrides: {
     MuiBadge: {
       colorPrimary: {
-      color: '#ffffff',
-      backgroundColor: '#f44336'
-    }
+        color: '#ffffff',
+        backgroundColor: '#f44336'
+      }
     },
     MuiButton: {
       containedPrimary: {
@@ -19,7 +19,15 @@ const theme = createMuiTheme({
         '&:hover': {
             background: '#8CC5CC !important'
           },
-       }
+       },
+      outlinedPrimary: {
+        color: '#8CC5CC',
+        border: '1px solid #8CC5CC',
+        '&:hover': {
+          background: '#fff !important',
+          border: '1px solid #8CC5CC'
+        },
+      },
     },
     MuiTypography: {
         root: {

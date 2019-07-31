@@ -3,6 +3,10 @@
   src: url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,800');
 }
 
+a {
+  text-decoration: none !important;
+}
+
 html, body {
   height: 100%;
   font-family: 'Montserrat', sans-serif !important;
@@ -16,9 +20,8 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-/*MATERIAL UI THEME OVERIIDES*/
-
-.MuiInputBase-input:focus{
+/*MATERIAL UI THEME OVERRIDES*/
+.MuiInputBase-input:focus {
   background-color: #fff !important;
 }
 
@@ -34,6 +37,12 @@ body {
 /*PADDING*/
 .padding-top-xsmall {
   padding-top: 10px !important;
+}
+
+/*WIDTH*/
+
+.full-width {
+  width: 100% !important;
 }
 
 .padding-bottom-xsmall {
