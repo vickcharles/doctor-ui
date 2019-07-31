@@ -57,9 +57,6 @@ const theme = createMuiTheme({
             background: '#fff !important'
           },
         },
-        multiline: {
-          padding: '20px'
-        },
         root: {
           border: '2px solid #ebeef1 !important',
           borderRadius: '5px',
@@ -88,6 +85,12 @@ const theme = createMuiTheme({
         },
         error: {
           borderColor: '#f44336 !important'
+        }
+      },
+      MuiDivider: {
+        root: {
+          backgroundColor: '#ebeef1',
+          height: '2px'
         }
       },
     MuiFormLabel: {

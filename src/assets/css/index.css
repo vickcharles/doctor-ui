@@ -7,6 +7,17 @@ a {
   text-decoration: none !important;
 }
 
+textarea {
+  height: 60px !important;
+}
+.margin-bottom-small {
+  margin-bottom: 10px !important;
+}
+
+.MuiInputBase-multiline {
+  padding: 0px !important;
+}
+
 html, body {
   height: 100%;
   font-family: 'Montserrat', sans-serif !important;
@@ -30,6 +41,11 @@ body {
   color: #203652 !important;
 }
 
+/*CURSOR POINTER*/
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .color-light-blue {
   color: #8CC5CC !important;
 }
@@ -40,11 +56,11 @@ body {
 }
 
 /*WIDTH*/
-
 .full-width {
   width: 100% !important;
 }
 
+/*PADDING*/
 .padding-bottom-xsmall {
   padding-bottom: 10px !important;
 }
@@ -108,11 +124,11 @@ body {
 }
 
 /* iPhones(landscape) ----------- */
-@media only screen and (min-width: 375px) {
-}
+@media only screen and (min-width: 375px) {}
 
 /* iPads (landscape) ----------- */
 @media only screen and (min-width: 768px) {
+
   /*Section*/
 	.section {
 		padding: 50px 80px;
@@ -141,6 +157,4 @@ body {
 }
 
 /* Laptops ----------- */
-@media only screen and (min-width: 1220px) {
-
-}
+@media only screen and (min-width: 1220px) {}

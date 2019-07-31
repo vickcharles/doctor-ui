@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Cropper from 'cropperjs';
-import Button from '@material-ui/core/Button';
+import { Button, Typography }from '@material-ui/core/';
 
 import  '../../../../node_modules/cropperjs/dist/cropper.min.css';
 import * as AvatarCropperComponent from './constants';
@@ -181,9 +181,14 @@ class AvatarCropper extends React.Component<PropsWithStyles, State> {
           ref={(e) => { this.fileUpload = e; }}
           disabled={this.state.isCropping}
         />
-        <label className="nabi-cursor-pointer text-center" htmlFor={AvatarCropperComponent.inputId}>
+        <label className="cursor-pointer text-center" htmlFor={AvatarCropperComponent.inputId}>
           <img ref={(e) => { this.imageHolder = e; }} src={currentLogo} style={imgStyle} alt="avatar"/>
         </label>
+				{!this.state.isCropping &&
+				 <Typography color="primary" className="text-align-center">
+					 Cambia tu foto de perfil
+				 </Typography>
+				}
         {actions}
       </div>
     );
