@@ -14,7 +14,7 @@ export const Login = () => {
       </Typography>
       <TextField
         fullWidth={true}
-        placeholder="correo electronico"
+        placeholder="correo electrónico"
         margin="normal"
       />
       <TextField
