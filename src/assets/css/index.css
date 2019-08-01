@@ -3,6 +3,12 @@
   src: url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,800');
 }
 
+
+/*FLOAT*/
+.float-right {
+  float: right !important;
+}
+
 a {
   text-decoration: none !important;
 }
@@ -12,6 +18,37 @@ textarea {
 }
 .margin-bottom-small {
   margin-bottom: 10px !important;
+}
+
+.action-buttons {
+	display: none;
+}
+
+li {
+	list-style: none;
+}
+
+/*LIST*/
+li.list {
+	color: #8CC5CC;
+	list-style: disc;
+}
+
+mark {
+	color: #717a8a !important;
+	background: none;
+}
+
+.editable-item:hover mark {
+	background: rgba(6, 195, 225, 0.4);
+}
+
+.editable-item:hover .action-buttons {
+	display: inline;
+}
+
+.editable-item:hover .music-item {
+	border: 2px solid #06c3e1;
 }
 
 .MuiInputBase-multiline {
@@ -39,6 +76,12 @@ body {
 /*COLOR*/
 .color-dark-blue {
   color: #203652 !important;
+}
+
+/*MARGIN*/
+
+.margin-left-xsmall {
+  margin-left: 5px !important;
 }
 
 /*CURSOR POINTER*/

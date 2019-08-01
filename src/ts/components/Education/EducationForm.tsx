@@ -13,8 +13,8 @@ import {
 import { EducationType } from './model';
 
 interface Props extends EducationType {
-  handleChange: (event: React.FormEvent<{}>) => void;
-  handleSave: (event: React.FormEvent<{}>) => void;
+  handleChange: any;
+  handleSave: any;
   handleCancel: () => void;
   isEditing: boolean;
 }
@@ -32,10 +32,7 @@ export const YearsList = (extraYears?: number) => {
 };
 
 const EducationForm: React.StatelessComponent<Props> = props => {
-  const selectOptions: any = [];
-
   let years = YearsList(5);
-
   const yearsItems = years.map((year) =>
     <option key={year.toString()} value={year}>{year}</option>
   );
@@ -48,8 +45,8 @@ const EducationForm: React.StatelessComponent<Props> = props => {
       onClick={props.handleSave}
       type="submit"
     >
-      <Icon className="nabi-margin-right-xsmall">save</Icon>
-      <span className="nabi-margin-left-xsmall">GUARDAR</span>
+      <Icon className="margin-right-xsmall">save</Icon>
+      <span className="margin-left-xsmall">GUARDAR</span>
     </Button>
   );
 
@@ -57,12 +54,12 @@ const EducationForm: React.StatelessComponent<Props> = props => {
     <Button
       color="primary"
       variant="contained"
-      className="nabi-margin-top-small nabi-text-uppercase"
+      className="margin-top-small text-uppercase"
       onClick={props.handleSave}
       type="submit"
     >
-      <Icon className="nabi-margin-right-xsmall">add</Icon>
-      <span className="nabi-margin-left-xsmall">GUARDAR</span>
+      <Icon className="margin-right-xsmall">add</Icon>
+      <span className="margin-left-xsmall">GUARDAR</span>
     </Button>
   );
 
@@ -127,7 +124,8 @@ const EducationForm: React.StatelessComponent<Props> = props => {
               <option value="" disabled={true}>
                 Grado
               </option>
-              {selectOptions}
+              <option value="whatever"> Whatever </option>
+              <option value="whatever"> Whatever </option>
             </Select>
           </FormControl>
             <TextField
@@ -135,8 +133,8 @@ const EducationForm: React.StatelessComponent<Props> = props => {
               fullWidth={true}
               id="description"
               margin="normal"
-              name=" description"
-              placeholder=""
+              name="description"
+              placeholder="description"
               required={true}
               value={props.description}
             />
@@ -144,11 +142,11 @@ const EducationForm: React.StatelessComponent<Props> = props => {
             <Button
               color="default"
               variant="contained"
-              className="nabi-margin-top-small nabi-text-uppercase nabi-margin-left-xsmall"
+              className="margin-top-small text-uppercase margin-left-xsmall"
               onClick={props.handleCancel}
             >
-              <Icon className="nabi-margin-right-xsmall">close</Icon>
-              <span className="nabi-margin-left-xsmall">CANCELAR</span>
+              <Icon className="margin-right-xsmall">close</Icon>
+              <span className="margin-left-xsmall">CANCELAR</span>
             </Button>
           </form>
         </Grid>

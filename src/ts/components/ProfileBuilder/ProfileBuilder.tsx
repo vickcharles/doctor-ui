@@ -3,36 +3,227 @@ import * as React from 'react';
 import AvatarUploader from '../AvatarUploader/AvatarUploader';
 import { Grid, TextField, Typography } from '@material-ui/core';
 import SectionTitle from '../common/SectionTitle';
+import EducationAdded from '../Education/EducationAdded';
+import { EducationType }  from '../Education/model';
+import EducationForm  from '../Education/EducationForm';
+
+import {
+  Button,
+  Icon
+} from '@material-ui/core';
+
+interface Props {}
+
+interface State extends EducationType{
+	bio: String;
+	educations: EducationType[];
+  showEducationForm: boolean;
+  isEditing: boolean;
+}
 
 /**
  * Profile Builder
  */
-export const ProfileBuilder = () => {
-  return (
-    <Grid container={true} className="margin-top-small">
-      <Grid xs={10} md={8} className="margin-auto">
-			  <Typography color="primary" variant="h5" className="text-align-center margin-bottom-small">
-			  	TU PERFIL
-			  </Typography>
-        <div className="section-wide background-color-white box-shadow">
-          <div className="text-align-center">
-            <AvatarUploader />
-          </div>
-          <Grid container={true}>
-					  <Grid xs={12}>
-					    <SectionTitle text="Acerca de ti" />
-					  </Grid>
-            <Grid xs={12} md={6}>
-              <TextField
-								fullWidth={true}
-								multiline={true}
-                placeholder="1000 Characteres max."
-                margin="normal"
-              />
-            </Grid>
-          </Grid>
-        </div>
-      </Grid>
-    </Grid>
+export class ProfileBuilder extends React.Component<Props, State> {
+	constructor(props: Props) {
+    super(props);
+    this.state = {
+      bio: '',
+			id: 0,
+			schoolName: '',
+			graduationYear: '',
+			degreeType: '',
+			fieldOfStudy: '',
+			description: '',
+		  educations: [],
+		  showEducationForm: false,
+		  isEditing: false
+    };
+	}
+
+
+	public deleteEducation(educationId: number): void {
+    this.setState({
+      educations: this.state.educations.filter(education =>
+        education.id !== educationId
+      )
+    });
+	}
+
+	public editEducation(educationId: number): void {
+    const editEducation = this.state.educations.filter(education =>
+      education.id === educationId
+    );
+
+    this.setState({
+      isEditing: true,
+			id: editEducation[0].id,
+      schoolName: editEducation[0].schoolName,
+      graduationYear: editEducation[0].graduationYear,
+      description: editEducation[0].description,
+      degreeType: editEducation[0].degreeType,
+      fieldOfStudy: editEducation[0].fieldOfStudy,
+    }, () => {
+      this.setState ({ showEducationForm: true });
+    });
+	}
+
+	public handleChange = (event: React.SyntheticEvent<HTMLInputElement>): void => {
+    const target = event.currentTarget;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      ...this.state,
+      [name]: value
+    });
+  }
+
+	public renderEducationForm = (): JSX.Element => (
+    <div>
+      <Typography className="margin-top-xsmall" color="primary">
+        AÑADIR EDUCACION
+      </Typography>
+      <EducationForm
+        handleChange={this.handleChange}
+        handleSave={this.handleSave}
+        schoolName={this.state.schoolName}
+        description={this.state.description}
+        graduationYear={this.state.graduationYear}
+				degreeType={this.state.degreeType}
+        fieldOfStudy={this.state.fieldOfStudy}
+        handleCancel={this.handleCancel}
+        isEditing={this.state.isEditing}
+      />
+    </div>
   );
+
+  public resetState(): void {
+    this.setState({
+      id: undefined,
+      schoolName: '',
+      graduationYear: '',
+      degreeType: '',
+      fieldOfStudy: '',
+      description: '',
+      isEditing: false
+    });
+  }
+
+  public toggleEducationForm = () => this.setState(prevState => ({
+    showEducationForm: !prevState.showEducationForm
+  }))
+
+  public handleCancel = (): void => {
+    this.resetState();
+    this.toggleEducationForm();
+  }
+
+
+	public handleSave = (event: React.SyntheticEvent<HTMLInputElement>): void => {
+    if (event) {
+      event.preventDefault();
+    }
+
+    const education: EducationType = {
+      schoolName: this.state.schoolName,
+      graduationYear: this.state.graduationYear,
+      degreeType: this.state.degreeType,
+      fieldOfStudy: this.state.fieldOfStudy,
+      description: this.state.description
+		};
+
+    // handle save when editing an exisitng education
+    if (this.state.isEditing) {
+      education.id = this.state.id;
+
+      const index = this.state.educations.findIndex(item => item.id === education.id);
+      const educationCopy = [...this.state.educations];
+
+      educationCopy.splice(index, 1, education);
+
+      this.setState({educations: educationCopy}, () => {
+        this.resetState();
+        this.toggleEducationForm();
+      });
+    } else {
+      education.id = this.state.educations.length;
+
+      if (this.state.educations.find(t => t === education)) {
+        return;
+      } else if (education.degreeType && education.graduationYear &&
+        education.fieldOfStudy && education.description && education.schoolName) {
+        this.setState({ educations: [...this.state.educations, education] }, () => {
+          this.resetState();
+          this.toggleEducationForm();
+        });
+      }
+    }
+  }
+
+  public render() {
+		const educationAdded = this.state.educations.map((education: any, i: any) => (
+			<li className="list" key={i}>
+				<EducationAdded
+					id={education.id}
+					gridWidth={6}
+					schoolName={education.schoolName}
+					graduationYear={education.graduationYear}
+					description={education.description}
+					degreeType={education.degreeType}
+					fieldOfStudy={education.fieldOfStudy}
+					deleteEducation={() => this.deleteEducation(education.id)}
+					editEducation={() => this.editEducation(education.id)}
+				/>
+			</li>
+		));
+
+    return (
+			<Grid container={true} className="margin-top-small">
+				<Grid xs={10} md={8} className="margin-auto">
+					<Typography color="primary" variant="h5" className="text-align-center margin-bottom-small">
+						TU PERFIL
+					</Typography>
+					<div className="section-wide background-color-white box-shadow">
+						<div className="text-align-center">
+							<AvatarUploader />
+						</div>
+						<Grid container={true}>
+							<Grid xs={12}>
+								<SectionTitle text="Acerca de ti" />
+							</Grid>
+							<Grid xs={12} md={6}>
+								<TextField
+									fullWidth={true}
+									multiline={true}
+									placeholder="1000 Characteres max."
+									margin="normal"
+								/>
+							</Grid>
+						</Grid>
+						<Grid container={true}>
+							<Grid xs={12} className="margin-top-small">
+                {!this.state.showEducationForm ?
+                <div>
+                  <SectionTitle text="Educacion" />
+                  <ul>
+                    {educationAdded}
+                  </ul>
+                  <div className="margin-top-medium">
+                    <Button color="primary" variant="contained" onClick={this.toggleEducationForm}>
+                     <Icon className="margin-right-xsmall">add</Icon>
+                      Añadir educacion
+                    </Button>
+                  </div>
+                 </div>
+                 : this.renderEducationForm()}
+							</Grid>
+						</Grid>
+					</div>
+				</Grid>
+			</Grid>
+		);
+	}
 };
+
+export default ProfileBuilder;

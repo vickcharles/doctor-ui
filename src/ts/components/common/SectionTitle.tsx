@@ -14,10 +14,10 @@ interface Props {
 const SectionTitle: React.StatelessComponent<Props> = props => {
   return (
     <div>
-      <Typography color="primary" className="nabi-text-mediumbold nabi-text-uppercase nabi-margin-bottom-xsmall">
+      <Typography color="primary" className="text-mediumbold text-uppercase margin-bottom-xsmall">
         {props.text}
       </Typography>
-      <Divider className="nabi-margin-bottom-xsmall" />
+      <Divider className="margin-bottom-xsmall" />
     </div>
   );
 };
