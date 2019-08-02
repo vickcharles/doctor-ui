@@ -7,7 +7,7 @@ import EducationAdded from '../Education/EducationAdded';
 import { EducationType }  from '../Education/model';
 import EducationForm  from '../Education/EducationForm';
 import Axios from '../../utils/axios';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 
 import {
   Button,
@@ -94,11 +94,14 @@ export class ProfileBuilder extends React.Component<Props, State> {
 			try {
         let response = await Axios.get("/doctors/getById", { headers: {"Authorization" : `Bearer ${token}`} })
         console.log(response.data)
-				this.setState({
-          bio: response.data.doctor[0].bio,
-          educations: response.data.doctor[0].education,
-          avatar: response.data.doctor[0].avatar
-        });
+        if(response.data.doctor[0]) {
+          this.setState({
+            bio: response.data.doctor[0].bio,
+            educations: response.data.doctor[0].education,
+            avatar: response.data.doctor[0].avatar
+          });
+        }
+       
 			} catch (err) {
 				alert('hubo un error ' + err);
 			}
@@ -190,6 +193,7 @@ export class ProfileBuilder extends React.Component<Props, State> {
         this.resetState();
         this.toggleEducationForm();
       });
+
     } else {
       education.id = this.state.educations.length;
 

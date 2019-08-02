@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://localhost:8001/api",
+  baseURL: "https://express-api-prueba.herokuapp.com/api",
   responseType: "json"
 });
