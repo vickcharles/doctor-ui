@@ -19,24 +19,19 @@ interface Props {
   imageChanged?(avatar: string): void;
 }
 
-type PropsWithStyles = Props;
-
-/**
- * Crops an image file
- */
-class AvatarCropper extends React.Component<PropsWithStyles, State> {
+class AvatarCropper extends React.Component<Props, State> {
   cropperInstance: any;
   imageHolder: any;
   fileUpload: any;
 
-  constructor(props: PropsWithStyles) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
       isLoading: false,
       isCropping: false,
       showError: false,
-      baseImage:  props.originalImage || defaultAvatar,
+      baseImage: props.originalImage || defaultAvatar,
     };
   }
 
@@ -63,7 +58,7 @@ class AvatarCropper extends React.Component<PropsWithStyles, State> {
       if (onePic.size > imageMaxSize || !this.validateFile(onePic)) {
         this.setState({
           showError: true,
-          baseImage: defaultAvatar
+          baseImage: this.props.originalImage || defaultAvatar
         });
       } else {
         let fr = new FileReader();

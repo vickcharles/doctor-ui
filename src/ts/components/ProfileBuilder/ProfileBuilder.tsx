@@ -6,6 +6,8 @@ import SectionTitle from '../common/SectionTitle';
 import EducationAdded from '../Education/EducationAdded';
 import { EducationType }  from '../Education/model';
 import EducationForm  from '../Education/EducationForm';
+import Axios from '../../utils/axios';
+import { Redirect } from 'react-router-dom'
 
 import {
   Button,
@@ -14,11 +16,13 @@ import {
 
 interface Props {}
 
-interface State extends EducationType{
-	bio: String;
+interface State extends EducationType {
+  bio: string;
+  avatar: string;
 	educations: EducationType[];
   showEducationForm: boolean;
   isEditing: boolean;
+  redirect: boolean;
 }
 
 /**
@@ -28,6 +32,7 @@ export class ProfileBuilder extends React.Component<Props, State> {
 	constructor(props: Props) {
     super(props);
     this.state = {
+      avatar: '',
       bio: '',
 			id: 0,
 			schoolName: '',
@@ -35,7 +40,8 @@ export class ProfileBuilder extends React.Component<Props, State> {
 			degreeType: '',
 			fieldOfStudy: '',
 			description: '',
-		  educations: [],
+      educations: [],
+      redirect: false,
 		  showEducationForm: false,
 		  isEditing: false
     };
@@ -48,7 +54,7 @@ export class ProfileBuilder extends React.Component<Props, State> {
         education.id !== educationId
       )
     });
-	}
+	};
 
 	public editEducation(educationId: number): void {
     const editEducation = this.state.educations.filter(education =>
@@ -66,9 +72,9 @@ export class ProfileBuilder extends React.Component<Props, State> {
     }, () => {
       this.setState ({ showEducationForm: true });
     });
-	}
+	};
 
-	public handleChange = (event: React.SyntheticEvent<HTMLInputElement>): void => {
+	public handleChange = (event: any): void => {
     const target = event.currentTarget;
     const value = target.value;
     const name = target.name;
@@ -77,7 +83,26 @@ export class ProfileBuilder extends React.Component<Props, State> {
       ...this.state,
       [name]: value
     });
-  }
+  };
+
+  public componentDidMount(): void {
+    this.fetchUser();
+  };
+
+  fetchUser = async () => {
+			const token = localStorage.getItem('token');
+			try {
+        let response = await Axios.get("/doctors/getById", { headers: {"Authorization" : `Bearer ${token}`} })
+        console.log(response.data)
+				this.setState({
+          bio: response.data.doctor[0].bio,
+          educations: response.data.doctor[0].education,
+          avatar: response.data.doctor[0].avatar
+        });
+			} catch (err) {
+				alert('hubo un error ' + err);
+			}
+	};
 
 	public renderEducationForm = (): JSX.Element => (
     <div>
@@ -110,15 +135,34 @@ export class ProfileBuilder extends React.Component<Props, State> {
     });
   }
 
+  public updateProfile = async () => {
+    const valuesToSave = {
+      avatar: this.state.avatar,
+      bio: this.state.bio,
+      education: this.state.educations
+    };
+
+    try {
+      console.log(valuesToSave);
+      const token = localStorage.getItem('token');
+      let response = await Axios.post("/doctors/create", valuesToSave, { headers: {"Authorization" : `Bearer ${token}`}});
+      this.setState({
+        redirect: true
+      })
+      console.log(response.data);
+    } catch (e) {
+      console.log(alert(e));
+    };
+  };
+
   public toggleEducationForm = () => this.setState(prevState => ({
     showEducationForm: !prevState.showEducationForm
-  }))
+  }));
 
   public handleCancel = (): void => {
     this.resetState();
     this.toggleEducationForm();
   }
-
 
 	public handleSave = (event: React.SyntheticEvent<HTMLInputElement>): void => {
     if (event) {
@@ -159,7 +203,13 @@ export class ProfileBuilder extends React.Component<Props, State> {
         });
       }
     }
-  }
+  };
+
+  public changeImage(img: any) {
+    this.setState({
+      avatar: img
+    });
+  };
 
   public render() {
 		const educationAdded = this.state.educations.map((education: any, i: any) => (
@@ -186,7 +236,7 @@ export class ProfileBuilder extends React.Component<Props, State> {
 					</Typography>
 					<div className="section-wide background-color-white box-shadow">
 						<div className="text-align-center">
-							<AvatarUploader />
+							<AvatarUploader originalImage={this.state.avatar} imageChanged={(img: any) => this.changeImage(img) } />
 						</div>
 						<Grid container={true}>
 							<Grid xs={12}>
@@ -195,9 +245,12 @@ export class ProfileBuilder extends React.Component<Props, State> {
 							<Grid xs={12} md={6}>
 								<TextField
 									fullWidth={true}
-									multiline={true}
+                  multiline={true}
+                  name="bio"
+                  onChange={this.handleChange}
 									placeholder="1000 Characteres max."
-									margin="normal"
+                  margin="normal"
+                  value={this.state.bio}
 								/>
 							</Grid>
 						</Grid>
@@ -211,14 +264,26 @@ export class ProfileBuilder extends React.Component<Props, State> {
                   </ul>
                   <div className="margin-top-medium">
                     <Button color="primary" variant="contained" onClick={this.toggleEducationForm}>
-                     <Icon className="margin-right-xsmall">add</Icon>
-                      Añadir educacion
+                      <Icon className="margin-right-xsmall">add</Icon>
+                      Añadir educación
                     </Button>
                   </div>
-                 </div>
-                 : this.renderEducationForm()}
+                </div>
+                : this.renderEducationForm()}
 							</Grid>
+              <Grid xs={12} className="align-right">
+                <Button
+                  type="submit"
+                  onClick={this.updateProfile}
+                  variant="contained"
+                  className="margin-top-small"
+                  color="primary"
+                >
+                  CONTINUAR
+                </Button>
+              </Grid>
 						</Grid>
+            {this.state.redirect && <Redirect to='/dashboard' />}
 					</div>
 				</Grid>
 			</Grid>

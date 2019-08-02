@@ -6,7 +6,10 @@ import {
 	Button
 } from '@material-ui/core';
 
+import { Redirect } from 'react-router-dom';
+
 import { useForm } from '../../hooks/useForm';
+import Axios from '../../utils/axios';
 
 /**
  * Login Form
@@ -17,9 +20,24 @@ export const Login = () => {
     password: ''
   }
   const { values, handleChange, handleSubmit } = useForm(login, state);
+  const [ redirect, setRedirect ] = React.useState(false);
 
-  function login() {
-    console.log(values);
+  async function login() {
+    if(values.email && values.password) {
+      try {
+        let userData = await Axios.post("/authenticate", values);
+        localStorage.setItem('token', userData.data.token);
+        setRedirect(true);
+      } catch (err) {
+        alert('hubo un error en la autenticación: ' + err);
+      }
+    }
+  };
+
+  const renderRedirect = () => {
+    if (redirect) {
+      return <Redirect to='/dashboard' />
+    }
   };
 
   return (
@@ -51,6 +69,7 @@ export const Login = () => {
           ACCEDER
         </Button>
       </form>
+      {renderRedirect()}
     </div>
   );
 };

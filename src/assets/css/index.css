@@ -158,6 +158,10 @@ body {
   margin: 0 auto !important;
 }
 
+.align-right {
+	text-align: right !important;
+}
+
 .margin-top-xsmall {
 	margin-top: 5px !important;
 }
