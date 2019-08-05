@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import AvatarUploader from '../AvatarUploader/AvatarUploader';
+// import AvatarUploader from '../AvatarUploader/AvatarUploader';
 import { Grid, TextField, Typography } from '@material-ui/core';
 import SectionTitle from '../common/SectionTitle';
 import EducationAdded from '../Education/EducationAdded';
@@ -11,6 +11,7 @@ import { Redirect } from 'react-router-dom';
 
 import {
   Button,
+  Avatar,
   Icon
 } from '@material-ui/core';
 
@@ -45,8 +46,7 @@ export class ProfileBuilder extends React.Component<Props, State> {
 		  showEducationForm: false,
 		  isEditing: false
     };
-	}
-
+  }
 
 	public deleteEducation(educationId: number): void {
     this.setState({
@@ -90,21 +90,20 @@ export class ProfileBuilder extends React.Component<Props, State> {
   };
 
   fetchUser = async () => {
-			const token = localStorage.getItem('token');
-			try {
-        let response = await Axios.get("/doctors/getById", { headers: {"Authorization" : `Bearer ${token}`} })
-        console.log(response.data)
-        if(response.data.doctor[0]) {
-          this.setState({
-            bio: response.data.doctor[0].bio,
-            educations: response.data.doctor[0].education,
-            avatar: response.data.doctor[0].avatar
-          });
-        }
-       
-			} catch (err) {
-				alert('hubo un error ' + err);
-			}
+		const token = localStorage.getItem('token');
+		try {
+      let response = await Axios.get("/doctors/getById", { headers: {"Authorization" : `Bearer ${token}`} })
+      console.log(response.data)
+      if(response.data.doctor[0]) {
+        this.setState({
+          bio: response.data.doctor[0].bio,
+          educations: response.data.doctor[0].education,
+          avatar: response.data.doctor[0].avatar
+        });
+      }
+		} catch (err) {
+			alert('hubo un error ' + err);
+		}
 	};
 
 	public renderEducationForm = (): JSX.Element => (
@@ -216,6 +215,11 @@ export class ProfileBuilder extends React.Component<Props, State> {
   };
 
   public render() {
+    const avatarDefaultStyles = {
+      width: '100px',
+      height: '100px'
+    };
+
 		const educationAdded = this.state.educations.map((education: any, i: any) => (
 			<li className="list" key={i}>
 				<EducationAdded
@@ -240,7 +244,12 @@ export class ProfileBuilder extends React.Component<Props, State> {
 					</Typography>
 					<div className="section-wide background-color-white box-shadow">
 						<div className="text-align-center">
-							<AvatarUploader originalImage={this.state.avatar} imageChanged={(img: any) => this.changeImage(img) } />
+              <Avatar
+								alt="Remy Sharp"
+								className="margin-auto"
+								style={avatarDefaultStyles}
+								src={require('../../../assets/img/doctor-image.png')}
+							/>
 						</div>
 						<Grid container={true}>
 							<Grid xs={12}>

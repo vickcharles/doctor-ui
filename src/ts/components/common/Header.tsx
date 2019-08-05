@@ -17,26 +17,26 @@ const Header = (props: any) => {
   return (
     <div className="container">
       <div className="justify-content-space-between display-flex padding-top-xsmall padding-bottom-xsmall">
-			  <Link to="/">
+			  <Link to={props.location.pathname === '/dashboard' ? '/dashboard' : '/'}>
           <Typography color="primary">
             DOCTORS-UI
           </Typography>
 			  </Link>
 				<Link to="/crear-cuenta">
-            {props.location.pathname === '/dashboard' &&
-              <div className="hide-on-mobile" id="header-social-menu">
-                <Button variant="contained" onClick={logout} color="default">
-                  SALIR
-                </Button>
-              </div>
-            }
-            {props.location.pathname === '/' &&
-              <div className="hide-on-mobile" id="header-social-menu">
-                <Button variant="outlined" color="primary">
-                  CREAR CUENTA
-                </Button>
-              </div>
-            }
+          {props.location.pathname === '/dashboard' &&
+            <div className="hide-on-mobile" id="header-social-menu">
+              <Button variant="contained" onClick={logout} color="default">
+                SALIR
+              </Button>
+            </div>
+          }
+          {props.location.pathname === '/' &&
+            <div className="hide-on-mobile" id="header-social-menu">
+              <Button variant="outlined" color="primary">
+                CREAR CUENTA
+              </Button>
+            </div>
+          }
 			  </Link>
       </div>
 	  </div>

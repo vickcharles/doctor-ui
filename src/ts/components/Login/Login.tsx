@@ -15,29 +15,27 @@ import Axios from '../../utils/axios';
  * Login Form
  */
 export const Login = () => {
-  const state = {
-    email: '',
-    password: ''
-  }
+ const state = {
+   email: '',
+   password: ''
+ }
   const { values, handleChange, handleSubmit } = useForm(login, state);
   const [ redirect, setRedirect ] = React.useState(false);
 
   async function login() {
-    if(values.email && values.password) {
       try {
         let userData = await Axios.post("/authenticate", values);
         localStorage.setItem('token', userData.data.token);
         setRedirect(true);
       } catch (err) {
-        alert('hubo un error en la autenticación: ' + err);
-      }
-    }
+        alert('credenciales incorrectas: ' + err);
+      };
   };
 
   const renderRedirect = () => {
     if (redirect) {
       return <Redirect to='/dashboard' />
-    }
+    };
   };
 
   return (

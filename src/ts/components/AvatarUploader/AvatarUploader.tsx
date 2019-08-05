@@ -117,7 +117,10 @@ class AvatarCropper extends React.Component<Props, State> {
       this.cropperInstance.clear();
       this.cropperInstance.destroy();
       this.cropperInstance = null;
-      this.setState({isCropping: false, baseImage: newBase64});
+      var data = newBase64.replace(/^data:image\/\w+;base64,/, "");
+      var buf = new Buffer(data, 'base64');
+      var fs = require('fs');
+      this.setState({isCropping: false, baseImage: fs.writeFile('image.png', buf)});
       if (this.props.imageChanged) {
         this.props.imageChanged(newBase64);
       }
@@ -138,12 +141,13 @@ class AvatarCropper extends React.Component<Props, State> {
       ctx.putImageData(blur(imageData, { amount: 2} ), 0, 0);
     }
 
+
     // encode image to data-uri with base64 version of compressed image
     return canvas.toDataURL();
   }
 
   render() {
-    const currentLogo = this.state.baseImage;
+    var currentLogo = this.state.baseImage
     // const handleClose = () => this.setState({ showError: false});
 
     let actions;

@@ -4,10 +4,27 @@ import { Grid } from '@material-ui/core';
 
 import { Login } from '../../Login/Login';
 
+import { Redirect } from 'react-router-dom';
+
 /**
  * Homepage
  */
 const HomePage = () => {
+  const [redirect, setRedirect] = React.useState(false);
+
+  React.useEffect(() => {
+		if(localStorage.getItem('token')) {
+      setRedirect(true)
+    };
+  },[]);
+
+
+  const renderRedirect = () => {
+    if (redirect) {
+      return <Redirect to='/dashboard' />
+    }
+  };
+
   return (
     <div className="margin-top-xlarge">
       <Grid container={true} className="container">
@@ -24,6 +41,7 @@ const HomePage = () => {
             <Login />
           </Grid>
         </Grid>
+        {renderRedirect()}
       </Grid>
 		</div>
   );

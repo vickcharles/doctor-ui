@@ -25,7 +25,6 @@ const Registration = () => {
   };
 
   const { values, handleChange, handleSubmit } = useForm(Submit, state);
-
   const [redirect, setRedirect] = React.useState(false);
 
   async function Submit() {
@@ -41,8 +40,7 @@ const Registration = () => {
       localStorage.setItem('token', userData.data.token);
       setRedirect(true);
     } catch (e) {
-      console.log(`😱 Axios request failed: ${e}`);
-      alert(e);
+      alert('ya usted posee una cuenta');
     }
   };
 
