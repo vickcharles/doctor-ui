@@ -3,14 +3,13 @@ import { useState } from 'react';
 export const useForm = (callback: any, state: any) => {
   const [values, setValues] = useState<any>(state);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: React.FormEvent<{}>) => {
     if (event) event.preventDefault();
       callback();
   };
 
-  const handleChange = (event: any) => {
-    event.persist();
-    setValues((values: any) => ({ ...values, [event.target.name]: event.target.value }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setValues((values: any) => ({ ...values, [e.target.name]: e.target.value }));
   };
 
   return {

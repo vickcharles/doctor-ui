@@ -1,6 +1,6 @@
 export default blur;
 
-function blur (imagedata: any, opts: any): any {
+function blur(imagedata: any, opts: any): any {
     var i, j;
     var data = imagedata.data;
     var width = imagedata.width;
@@ -29,7 +29,7 @@ function blur (imagedata: any, opts: any): any {
     }
 
     return imagedata;
-}
+};
 
 function getGaussianDot (x: number , y: number , weights: object , imagedata: any, amount: number) {
     var w = imagedata.width;
@@ -93,7 +93,7 @@ function getWeights (amount: number): object {
 
 function gaussian (x: number, y: number, deviation: number ): number {
     var ret = Math.exp(
-        - (x * x + y * y) / (2 * deviation * deviation)
+      - (x * x + y * y) / (2 * deviation * deviation)
     ) /
     (2 * Math.PI * deviation * deviation);
     return ret;
